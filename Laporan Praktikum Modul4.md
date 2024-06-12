@@ -1,201 +1,244 @@
-# <h1 align="center">Laporan Praktikum Modul </h1>
+# <h1 align="center">Laporan Praktikum Modul Searching</h1>
 <p align="center">Yoka Romadani</p>
 <p align="center">2311110060</p>>
 <p align="center">SD04-B</p>
 
 ## Dasar Teori
-Array merupakan struktur data yang paling dasar. Sebelum mempelajari struktur data lainnya, alangkah baiknya, kita perlu mempelajari Array terlebih dahulu
+Pencarian (Searching) yaitu proses menemukan suatu nilai tertentu 
+pada kumpulan data. Hasil pencarian adalah salah satu dari tiga keadaan 
+ini: data ditemukan, data ditemukan lebih dari satu, atau data tidak 
+ditemukan. Searching juga dapat dianggap sebagai proses pencarian suatu 
+data di dalam sebuah array dengan cara mengecek satu persatu pada 
+setiap index baris atau setiap index kolomnya dengan menggunakan teknik 
+perulangan untuk melakukan pencarian data.
 ## Guided
-## 1. Program Array Tiga dimensi
+## 1. Buatlah sebuah project dengan menggunakan sequential search sederhana untuk melakukan pencarian data.
 ```C++
-#include <iostream>
-using namespace std;
+#include <iostream> 
+using namespace std; 
 
-// PROGRAM INPUT ARRAY 3 DIMENSI
-int main() {
-    // Deklarasi array
-    int arr[2][3][3];
-
-    // Input elemen
-    for (int x = 0; x < 2; x++) {
-        for (int y = 0; y < 3; y++) {
-            for (int z = 0; z < 3; z++) {
-                cout << "Input Array[" << x << "][" << y << "][" << z << "] = ";
-                cin >> arr[x][y][z];
-            }
-        }
-        cout << endl;
-    }
-
-    // Output Array
-    for (int x = 0; x < 2; x++) {
-        for (int y = 0; y < 3; y++) {
-            for (int z = 0; z < 3; z++) {
-                cout << "Data Array[" << x << "][" << y << "][" << z << "] = " << arr[x][y][z] << endl;
-            }
-        }
-    }
-    cout << endl;
-
-    // Tampilan array
-    for (int x = 0; x < 2; x++) {
-        for (int y = 0; y < 3; y++) {
-            for (int z = 0; z < 3; z++) {
-                cout << arr[x][y][z] << " ";
-            }
-            cout << endl;
-        }
-        cout << endl;
-    }
-
-    return 0;
+int main() { 
+    const int n = 10; 
+    int data[n] = {9, 4, 1, 7, 5, 12, 4, 13, 4, 10}; 
+    int cari = 10; 
+    bool ketemu = false; 
+    int i; 
+    
+    // Algoritma Sequential Search 
+    for (i = 0; i < n; i++) { 
+        if(data[i] == cari) { 
+            ketemu = true; 
+            break; 
+        } 
+    } 
+    
+    cout << "\t Program Sequential Search Sederhana\n" << endl; 
+    cout << "Data: {9, 4, 1, 7, 5, 12, 4, 13, 4, 10}" << endl; 
+    
+    if (ketemu) { 
+        cout << "\nAngka " << cari << " ditemukan pada indeks ke-" << i << endl; 
+    } else { 
+        cout << cari << " tidak dapat ditemukan pada data." << endl; 
+    } 
+    
+    return 0; 
 }
+ 
 ```
 ### Output
-![Screenshot 2024-06-12 082214](https://github.com/yokaroo/Praktikum-Struktur-Data-Asignment-Modul2/blob/main/Screenshot%202024-06-12%20082214.png)
+![Screenshot 2024-06-12 223737](https://github.com/yokaroo/Praktikum-Struktur-Data-Asignment-Modul4/blob/main/Screenshot%202024-06-12%20223737.png)
 ## Iterpretasi
-Kode program ini mendeklarasikan sebuah array 3 dimensi berukuran 2x3x3 dan meminta pengguna untuk mengisi setiap elemen array melalui input. Program menggunakan tiga loop bersarang untuk mengakses setiap elemen array dan mengisi nilainya. Setelah semua nilai diinput, program menampilkan nilai-nilai tersebut dalam dua format: pertama, dengan menunjukkan indeks setiap elemen dan nilainya, dan kedua, dengan menampilkan elemen-elemen array dalam bentuk baris dan kolom yang lebih mudah dibaca. Program kemudian mengakhiri dengan return 0, menandakan bahwa program selesai dijalankan dengan sukses.
-
-## 2. Program Mencari Nilai Maksimal Pada Aray
+Program ini adalah implementasi dari algoritma Sequential Search yang bertujuan untuk mencari sebuah angka dalam array. Array `data` yang telah ditentukan diinisialisasi dengan sepuluh elemen bilangan bulat. Program kemudian mencari nilai `cari` di dalam array menggunakan algoritma Sequential Search, yang bekerja dengan cara memeriksa setiap elemen array satu per satu hingga menemukan nilai yang dicari atau sampai akhir array. Jika nilai `cari` ditemukan dalam array, program akan mencetak pesan yang menunjukkan bahwa angka tersebut ditemukan beserta indeksnya. Jika tidak, program akan mencetak pesan yang menyatakan bahwa angka tersebut tidak ditemukan dalam array. Setelah itu, program selesai dieksekusi. Semua pesan keluaran termasuk informasi tentang algoritma, data yang diuji, dan hasil pencarian, dicetak ke layar untuk memudahkan pemahaman.
+## 2. Buatlah sebuah project untuk melakukan pencarian data dengan menggunakan Binary Search
 ```C++
-#include <iostream>
-using namespace std;
-
-int main() {
-    int maks, a, lokasi;
-    cout << "Masukkan panjang array: ";
-    cin >> a;
-    int array[a];
-
-    cout << "Masukkan " << a << " angka\n";
-    for (int i = 0; i < a; i++) {
-        cout << "Array ke-" << i << ": ";
-        cin >> array[i];
-    }
-
-    maks = array[0];
-    lokasi = 0;  // Inisialisasi lokasi dengan indeks pertama
-
-    for (int i = 1; i < a; i++) {  // Mulai dari indeks ke-1 karena maks sudah diinisialisasi dengan array[0]
-        if (array[i] > maks) {
-            maks = array[i];
-            lokasi = i;
-        }
-    }
-
-    cout << "Nilai maksimum adalah " << maks << " berada di Array ke-" << lokasi << endl;
-
-    return 0;
-}
+#include <iostream> 
+using namespace std; 
+#include <conio.h> 
+#include <iomanip> 
+ 
+int data[7] = {1, 8, 2, 5, 4, 9, 7}; 
+int cari; 
+ 
+void selection_sort() 
+{ 
+      int temp, min, i, j; 
+ 
+      for(i=0; i<7;i++) 
+      { 
+            min = i; 
+            for(j = i+1; j<7; j++) 
+            { 
+                  if(data[j]<data[min]) 
+                  { 
+                        min=j; 
+                  } 
+            } 
+            temp = data[i]; 
+            data[i]  = data[min]; 
+            data[min] = temp; 
+      } 
+} 
+ 
+void binarysearch() 
+{ 
+      //searching 
+      int awal, akhir, tengah, b_flag = 0; 
+      awal = 0; 
+      akhir = 7; 
+      while (b_flag == 0 && awal<=akhir) 
+      { 
+            tengah = (awal + akhir)/2; 
+            if(data[tengah] == cari)
+	 { 
+                  b_flag = 1; 
+                  break; 
+            } 
+            else if(data[tengah]<cari) 
+                  awal = tengah + 1; 
+            else 
+                  akhir = tengah -1; 
+      } 
+ 
+        if(b_flag == 1) 
+            cout<<"\n Data ditemukan pada index ke
+"<<tengah<<endl; 
+      else 
+            cout<<"\n Data tidak ditemukan\n"; 
+} 
+ 
+int main() 
+{ 
+      cout<<"\t   BINARY SEARCH "<<endl; 
+      cout<<"\n Data           : "; 
+      //tampilkan data awal 
+      for(int x = 0; x<7; x++) 
+            cout<<setw(3)<<data[x]; 
+      cout<<endl; 
+ 
+      cout<<"\n Masukkan data yang ingin Anda cari : "; 
+      cin>>cari; 
+      cout<<"\n Data diurutkan : "; 
+      //urutkan data dengan selection sort 
+      selection_sort(); 
+      //tampilkan data setelah diurutkan 
+      for(int x = 0; x<7;x++) 
+            cout<<setw(3)<<data[x]; 
+ 
+      cout<<endl; 
+ 
+        binarysearch(); 
+ 
+      _getche(); 
+      return EXIT_SUCCESS; 
+ 
+ }
 ```
 ## Output
-![Screenshot 2024-06-12 083334](https://github.com/yokaroo/Praktikum-Struktur-Data-Asignment-Modul2/blob/main/Screenshot%202024-06-12%20083334.png)
+![Screenshot 2024-06-12 224443](https://github.com/yokaroo/Praktikum-Struktur-Data-Asignment-Modul4/blob/main/Screenshot%202024-06-12%20224443.png)
 ## Interpretasi Code
-Kode tersebut adalah sebuah program C++ yang mencari nilai maksimum dalam sebuah array yang dimasukkan oleh pengguna. Program ini meminta pengguna untuk memasukkan panjang array dan kemudian mengisi array dengan angka-angka yang diinput oleh pengguna. Setelah array terisi, program mencari nilai maksimum dalam array tersebut dengan memulai perbandingan dari elemen kedua (indeks 1) hingga elemen terakhir. Jika ditemukan nilai yang lebih besar daripada nilai maksimum saat ini, nilai tersebut akan menjadi nilai maksimum yang baru, dan lokasinya (indeks) akan diperbarui. Akhirnya, program menampilkan nilai maksimum dan indeksnya kepada pengguna.
-
+Program ini menggunakan algoritma Binary Search untuk mencari angka dalam array yang telah diurutkan menggunakan algoritma Selection Sort. Setelah pengguna memasukkan angka yang dicari, array diurutkan dengan Selection Sort. Kemudian, program melakukan pencarian menggunakan Binary Search. Jika angka ditemukan dalam array, program mencetak indeksnya. Jika tidak, program memberi tahu bahwa angka tidak ditemukan. Seluruh output, termasuk data awal, data setelah diurutkan, dan hasil pencarian, dicetak ke layar. Program berakhir setelah pengguna memberikan input.
 ### UnGuided
-## 1. Buatlah program untuk menampilkan output seperti berikut dengan data yang ditampilkan user
+## 1. Buatlah sebuah program untuk mencari sebuah huruf pada sebuah kalimat yang sudah di input dengan menggunakan Binary Search! 
 ```C++
-//Menggunakan library input/output dan struktur data
 #include <iostream>
-#include <sstream>
-#include <vector>
+#include <string>
+#include <algorithm>
+
 using namespace std;
 
-//Membuat kode inti atau main code
-int main() {
-    string name; // membuat variabel
-    //membuat vektor bertipe integer
-    vector<int> numbers;
-    vector<int> evenNumbers;
-    vector<int> oddNumbers;
-    
-    //meminta inputan
-    cout << "Masukkan nama Anda:" << endl;
-    getline(cin, name);
-    cout<<endl;
-    //Menyapa pengguna dan meminta inputan angka
-    cout<<"Halo, "<< name << ". Selamat datang di Program pemilihan angka genap dan ganjil." << endl<<endl;
-    cout << "Masukkan angka anda, pisahkan dengan spasi!" << endl;
-    cout << "Klik enter untuk menampilkan hasil !" << endl;
-    string input;
-    getline(cin, input);
-    
-    // Membaca angka-angka dari baris input
-    stringstream ss(input);
-    int num;
-    while (ss >> num) {
-        numbers.push_back(num);
+// Fungsi untuk mengubah huruf kecil menjadi huruf besar
+char toUpperCase(char ch) {
+    if (ch >= 'a' && ch <= 'z') {
+        return ch - 'a' + 'A';
     }
-    
-    // Memisahkan angka genap dan ganjil dari inputan pengguna
-    for (int num : numbers) {
-        if (num % 2 == 0) { //menggunakan modulus
-            evenNumbers.push_back(num);  //jika habis di bagi 2 masuk ke sini
+    return ch;
+}
+
+// Fungsi untuk mengurutkan string secara ascending
+void sortString(string &str) {
+    sort(str.begin(), str.end());
+}
+
+// Fungsi Binary Search untuk mencari huruf dalam string
+bool binarySearch(const string &str, char target) {
+    int left = 0;
+    int right = str.length() - 1;
+
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+
+        // Ubah huruf kecil menjadi huruf besar untuk pencarian
+        char current = toUpperCase(str[mid]);
+
+        if (current == target) {
+            return true;
+        } else if (current < target) {
+            left = mid + 1;
         } else {
-            oddNumbers.push_back(num); //jika tidak habis masuk kesini
+            right = mid - 1;
         }
     }
-    
-    // Menampilkan angka-angka genap
-    cout << "Angka genap: ";
-    for (int num : evenNumbers) {
-        cout << num << " ";
+
+    return false;
+}
+
+int main() {
+    string sentence;
+    cout << "Masukkan kalimat: ";
+    getline(cin, sentence);
+
+    // Urutkan kalimat
+    sortString(sentence);
+
+    char target;
+    cout << "Masukkan huruf yang ingin dicari: ";
+    cin >> target;
+
+    // Ubah huruf kecil menjadi huruf besar untuk pencarian
+    target = toUpperCase(target);
+
+    // Cari huruf menggunakan Binary Search
+    if (binarySearch(sentence, target)) {
+        cout << "Huruf " << target << " ditemukan dalam kalimat." << endl;
+    } else {
+        cout << "Huruf " << target << " tidak ditemukan dalam kalimat." << endl;
     }
-    cout << endl;
-    
-    // Menampilkan angka-angka ganjil
-    cout << "Angka ganjil: ";
-    for (int num : oddNumbers) {
-        cout << num << " ";
-    }
-    cout << endl<<endl;
-    
+
     return 0;
 }
+
 ```
 ### Output
-![Screenshot 2024-06-12 094446](https://github.com/yokaroo/Praktikum-Struktur-Data-Asignment-Modul2/blob/main/Screenshot%202024-06-12%20094446.png)
+![Screenshot 2024-06-12 225137](https://github.com/yokaroo/Praktikum-Struktur-Data-Asignment-Modul4/blob/main/Screenshot%202024-06-12%20225137.png)
 
-## 2. Buatlah program Input array tiga dimensi (seperti pada guided) tetapi jumlah atau ukuran elemennya diinputkan oleh user!
+## 2. Buatlah sebuah program yang dapat menghitung banyaknya huruf vocal dalam sebuah kalimat! 
 ```C++
 #include <iostream>
+#include <string>
+#include <cctype> // Untuk fungsi isalpha dan tolower
+
 using namespace std;
 
+// Fungsi untuk menghitung banyaknya huruf vokal dalam sebuah kalimat
+int countVowels(const string &sentence) {
+    int count = 0;
+    for (char ch : sentence) {
+        char lowerCh = tolower(ch); // Ubah huruf menjadi huruf kecil
+        if (lowerCh == 'a' || lowerCh == 'e' || lowerCh == 'i' || lowerCh == 'o' || lowerCh == 'u') {
+            count++;
+        }
+    }
+    return count;
+}
+
 int main() {
-    int x, y, z;
+    string sentence;
+    cout << "Masukkan sebuah kalimat: ";
+    getline(cin, sentence);
 
-    // Meminta pengguna untuk memasukkan ukuran array
-    cout << "Masukkan jumlah baris: ";
-    cin >> x;
-    cout << "Masukkan jumlah kolom: ";
-    cin >> y;
-    cout << "Masukkan jumlah depth: ";
-    cin >> z;
+    int vowelsCount = countVowels(sentence);
 
-    // Deklarasi array tiga dimensi
-    int arr[x][y][z];
-
-    // Input elemen array
-    cout << "Masukkan elemen-elemen array:\n";
-    for (int i = 0; i < x; ++i) {
-        for (int j = 0; j < y; ++j) {
-            for (int k = 0; k < z; ++k) {
-                cout << "Array[" << i << "][" << j << "][" << k << "]: ";
-                cin >> arr[i][j][k];
-            }
-        }
-    }
-
-    // Output elemen array
-    cout << "\nElemen-elemen array yang dimasukkan:\n";
-    for (int i = 0; i < x; ++i) {
-        for (int j = 0; j < y; ++j) {
-            for (int k = 0; k < z; ++k) {
-                cout << "Array[" << i << "][" << j << "][" << k << "]: " << arr[i][j][k] << endl;
-            }
-        }
-    }
+    cout << "Jumlah huruf vokal dalam kalimat adalah: " << vowelsCount << endl;
 
     return 0;
 }
@@ -203,58 +246,39 @@ int main() {
 ```
 
 ## Output
-![Screenshot 2024-06-12 094933.png](https://github.com/yokaroo/Praktikum-Struktur-Data-Asignment-Modul2/blob/main/Screenshot%202024-06-12%20094933.png)
+![Screenshot 2024-06-12 225531](https://github.com/yokaroo/Praktikum-Struktur-Data-Asignment-Modul4/blob/main/Screenshot%202024-06-12%20225531.png)
 
-### 3.  Buatlah program menu untuk mencari nilai Maksimum, Minimum dan Nilai rata– rata dari suatu array dengan input yang dimasukan oleh user
+### 3. Diketahui data = 9, 4, 1, 4, 7, 10, 5, 4, 12, 4. Hitunglah berapa banyak angka 4 dengan menggunakan algoritma Sequential Search!
 ```C++
 #include <iostream>
-#include <climits> // Untuk menggunakan konstanta INT_MIN dan INT_MAX
+
 using namespace std;
 
+// Fungsi untuk menghitung berapa kali angka 4 muncul dalam data menggunakan Sequential Search
+int countFour(int arr[], int length) {
+    int count = 0;
+    for (int i = 0; i < length; ++i) {
+        if (arr[i] == 4) {
+            count++;
+        }
+    }
+    return count;
+}
+
 int main() {
-    int n;
+    int data[] = {9, 4, 1, 4, 7, 10, 5, 4, 12, 4};
+    int length = sizeof(data) / sizeof(data[0]);
 
-    // Meminta pengguna untuk memasukkan jumlah elemen array
-    cout << "Masukkan jumlah elemen array: ";
-    cin >> n;
+    int countOfFour = countFour(data, length);
 
-    // Membuat array untuk menyimpan elemen-elemen yang dimasukkan oleh pengguna
-    int arr[n];
-
-    // Meminta pengguna untuk memasukkan elemen-elemen array
-    cout << "Masukkan elemen-elemen array:\n";
-    for (int i = 0; i < n; ++i) {
-        cout << "Elemen " << i + 1 << ": ";
-        cin >> arr[i];
-    }
-
-    // Mencari nilai maksimum, minimum, dan rata-rata
-    int maksimum = INT_MIN;
-    int minimum = INT_MAX;
-    int total = 0;
-
-    for (int i = 0; i < n; ++i) {
-        if (arr[i] > maksimum) {
-            maksimum = arr[i];
-        }
-        if (arr[i] < minimum) {
-            minimum = arr[i];
-        }
-        total += arr[i];
-    }
-
-    double rata_rata = static_cast<double>(total) / n;
-
-    // Menampilkan hasil
-    cout << "\nNilai Maksimum: " << maksimum << endl;
-    cout << "Nilai Minimum: " << minimum << endl;
-    cout << "Nilai Rata-rata: " << rata_rata << endl;
+    cout << "Jumlah angka 4 dalam data adalah: " << countOfFour << endl;
 
     return 0;
 }
+
 ```
 ## output
-![Screenshot 2024-06-12 095423](https://github.com/yokaroo/Praktikum-Struktur-Data-Asignment-Modul2/blob/main/Screenshot%202024-06-12%20095423.png)
+![Screenshot 2024-06-12 225837](https://github.com/yokaroo/Praktikum-Struktur-Data-Asignment-Modul4/blob/main/Screenshot%202024-06-12%20225837.png)
 
 ### Kesimpulan 
-Dengan pemahaman tentang berbagai jenis array ini, kita dapat lebih efektif menggunakan dan memahami struktur data yang kompleks dan penggunaannya dalam pemrograman. Array merupakan fondasi yang penting dalam mempelajari struktur data lainnya dan memiliki peran yang krusial dalam pengembangan perangkat lunak.
+Dalam pencarian data, terdapat dua metode utama: Sequential Search dan Binary Search. Sequential Search digunakan untuk data yang tidak terurut, dengan konsep membandingkan setiap elemen satu per satu dari awal hingga akhir array. Binary Search, di sisi lain, digunakan untuk data yang telah terurut, dengan konsep membagi data menjadi dua bagian pada setiap tahap pencarian. Dalam Binary Search, elemen tengah diambil sebagai acuan untuk membagi data, dan pencarian dilanjutkan berdasarkan relasi antara nilai yang dicari dengan nilai tengah tersebut. Jika nilai yang dicari lebih besar dari nilai tengah, pencarian dilanjutkan ke bagian kanan; jika lebih kecil, ke bagian kiri. Jika nilai yang dicari sama dengan nilai tengah, pencarian selesai. Dengan Binary Search, proses pencarian dapat lebih efisien dibandingkan dengan Sequential Search, terutama untuk data yang besar dan telah terurut.
